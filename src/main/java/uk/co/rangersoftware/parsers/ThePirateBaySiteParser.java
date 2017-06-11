@@ -54,7 +54,7 @@ public class ThePirateBaySiteParser implements Parser {
                 boolean hasBeenDownlaoded = series.showHasBeenDownloaded(show);
                 String sizeData = tableRow.parent().select("td > font").first().text();
                 DownloadSize downloadSize = sizer.downloadSize(sizeData, Constants.largestSize);
-                logger.debug("MAP:[" + show + "] HBD:[" + hasBeenDownlaoded + "] SIZE:[" + downloadSize.getSizeInMB() + "MB] RAW:[" + candidateTitle + "]");
+                logger.debug("SHOW:[" + show + "] HBD:[" + hasBeenDownlaoded + "] SIZE:[" + downloadSize.getSizeInMB() + "MB] TITLE:[" + candidateTitle + "]");
                 if(!showIsValid || hasBeenDownlaoded) continue;
                 if(!downloadSize.isValid()){
                     String ignoreMessage = invalidSizeMessage(series.getTitle(), show, downloadSize);
