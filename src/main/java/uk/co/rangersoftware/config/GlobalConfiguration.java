@@ -42,7 +42,7 @@ public class GlobalConfiguration implements GlobalConfig {
     }
 
     public List<String> downloadHistory(){
-        File file = new File(Constants.downloadHistoryFileName);
+        File file = new File(Constants.DOWNLOAD_HISTORY_FILE_NAME);
         if(!file.exists()) return new ArrayList<String>();
         return FileUtil.readContentIntoList(file);
     }
@@ -52,7 +52,7 @@ public class GlobalConfiguration implements GlobalConfig {
     }
 
     public void addToDownloadHistory(String data){
-        File file = new File(Constants.downloadHistoryFileName);
+        File file = new File(Constants.DOWNLOAD_HISTORY_FILE_NAME);
         appendToFile(file, data);
     }
 

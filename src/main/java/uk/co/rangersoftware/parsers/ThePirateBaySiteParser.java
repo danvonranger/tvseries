@@ -50,12 +50,12 @@ public class ThePirateBaySiteParser implements Parser {
                 String magnetLink = tableRow.parent().select("td > a").first().attr("href");
                 if(magnetLinkMatcher.hasBeenDownloaded(magnetLink)) continue;
                 Show show = versionMatcher.mapToShow(candidateTitle);
-                logger.debug("Looking at " + show.toString());
-                logger.debug("Raw name: " + candidateTitle);
-                if(!show.isValid()) continue;
-                if(series.showHasBeenDownloaded(show)) continue;
+                boolean showIsValid = show.isValid();
+                boolean hasBeenDownlaoded = series.showHasBeenDownloaded(show);
                 String sizeData = tableRow.parent().select("td > font").first().text();
                 DownloadSize downloadSize = sizer.downloadSize(sizeData, Constants.largestSize);
+                logger.debug("MAP:[" + show + "] HBD:[" + hasBeenDownlaoded + "] SIZE:[" + downloadSize.getSizeInMB() + "MB] RAW:[" + candidateTitle + "]");
+                if(!showIsValid || hasBeenDownlaoded) continue;
                 if(!downloadSize.isValid()){
                     String ignoreMessage = invalidSizeMessage(series.getTitle(), show, downloadSize);
                     logger.debug(ignoreMessage);

@@ -57,7 +57,7 @@ public class DownloaderImpl implements Downloader {
     }
 
     private DownloadResult downloadAttempt(String urlStr, String useragent) {
-        File file = new File(Constants.downloadDataFileName);
+        File file = new File(Constants.DOWNLOAD_DATA_FILE_NAME);
         file.delete();
         DownloadResult result = new DownloadResult();
         try {

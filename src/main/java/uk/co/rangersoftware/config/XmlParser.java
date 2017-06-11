@@ -33,9 +33,9 @@ public class XmlParser {
     private static void loadConfigDoc() throws FileNotFoundException {
         if (configDoc != null) return;
 
-        File fXmlFile = new File(Constants.tvShowsFileName);
+        File fXmlFile = new File(Constants.TV_SHOWS_FILE_NAME);
         if (!fXmlFile.exists()) {
-            throw new FileNotFoundException("Failed to find configuration file: " + Constants.tvShowsFileName);
+            throw new FileNotFoundException("Failed to find configuration file: " + Constants.TV_SHOWS_FILE_NAME);
         }
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -71,7 +71,7 @@ public class XmlParser {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(configDoc);
-            StreamResult result = new StreamResult(new File(Constants.tvShowsFileName));
+            StreamResult result = new StreamResult(new File(Constants.TV_SHOWS_FILE_NAME));
             transformer.transform(source, result);
         } catch (Exception ex) {
 

@@ -4,9 +4,9 @@
 	    <downloadSoundFile enabled="true"><![CDATA[F:\java\media\buzz.mp3]]></downloadSoundFile>	
 	    <applicationEnd enabled="true"><![CDATA[F:\java\media\applause.mp3]]></applicationEnd>
 	    <errorSoundFile enabled="true"><![CDATA[F:\java\media\bomb_siren.mp3]]></errorSoundFile>
-		<debugMode>false</debugMode>
+		<debugMode>true</debugMode>
 		<!-- set to true to force and update of all shows regardless of dates -->
-		<updateAllSeries>false</updateAllSeries>
+		<updateAllSeries>true</updateAllSeries>
 		<staleRecycleIntervalInDays>14</staleRecycleIntervalInDays>
 		<minimumInteralBetweenChecksInHours>4</minimumInteralBetweenChecksInHours>
 		<maxRetrieveAttemptsPerUserAgent>2</maxRetrieveAttemptsPerUserAgent>
@@ -173,9 +173,9 @@
 			<lastUpdateCheck>11/06/2017 14:55:20</lastUpdateCheck>
 			<lastSeriesDownloaded>14/05/2017 09:07:37</lastSeriesDownloaded>
 		</series>
-		<series name="Dark Matter">
+		<series name="Dark Matter" solo="true">
 			<episodes>1-*,2-1,2-2,2-3,2-4,2-5,2-6,2-7,2-8,2-9,2-10,2-11,2-12,2-13,3-1,3-2</episodes>
-			<lastUpdateCheck>09/06/2017 19:08:07</lastUpdateCheck>
+			<lastUpdateCheck>11/06/2017 19:10:26</lastUpdateCheck>
 			<lastSeriesDownloaded>21/05/2017 09:07:37</lastSeriesDownloaded>
 		</series>
 		<series name="Dark Matters Twisted But True">
