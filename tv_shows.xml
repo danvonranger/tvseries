@@ -31,10 +31,6 @@
 				<baseUrl><![CDATA[https://thepiratebay.org]]></baseUrl>
 			</baseUrls>
 			<searchUrlMasks>
-			<!--
-				<searchUrlMask><![CDATA[{baseUrl}/search/{encodedSeriesName} +{uploader}%20-720p%20-1080p/0/99/0]]></searchUrlMask>
-				<searchUrlMask><![CDATA[{baseUrl}/search/{encodedSeriesName} +{uploader}%20+720p%20-1080p/0/99/0]]></searchUrlMask>
-				-->
 				<searchUrlMask><![CDATA[{baseUrl}/search/{encodedSeriesName} +{uploader}/0/99/0]]></searchUrlMask>
 				<searchUrlMask><![CDATA[{baseUrl}/search/{encodedSeriesName}/0/99/0]]></searchUrlMask>
 			</searchUrlMasks>

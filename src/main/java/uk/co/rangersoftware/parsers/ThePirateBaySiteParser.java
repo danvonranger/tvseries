@@ -51,6 +51,7 @@ public class ThePirateBaySiteParser implements Parser {
                 if(magnetLinkMatcher.hasBeenDownloaded(magnetLink)) continue;
                 Show show = versionMatcher.mapToShow(candidateTitle);
                 logger.debug("Looking at " + show.toString());
+                logger.debug("Raw name: " + candidateTitle);
                 if(!show.isValid()) continue;
                 if(series.showHasBeenDownloaded(show)) continue;
                 String sizeData = tableRow.parent().select("td > font").first().text();
