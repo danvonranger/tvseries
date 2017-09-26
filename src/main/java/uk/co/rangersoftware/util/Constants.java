@@ -4,6 +4,8 @@ public class Constants {
     public static final String ROOT_FOLDER = "F:\\github\\tvseries\\";
     public static final String DOWNLOAD_HISTORY_FILE_NAME = ROOT_FOLDER +  "history.txt";
     public static final String TV_SHOWS_FILE_NAME = ROOT_FOLDER + "tv_shows.xml";
+    public static final String LOCK_FILE_NAME = ROOT_FOLDER + "tv.lock";
+    public static final String LAST_DOWNLOAD_RUN_FILE_NAME = ROOT_FOLDER + "tv.frequency";
     public static final String DOWNLOAD_DATA_FILE_NAME = ROOT_FOLDER + "download.data";
     public static final String LAST_UPDATE_CHECK = "lastUpdateCheck";
     public static final String LAST_SERIES_DOWNLOADED = "lastSeriesDownloaded";
@@ -30,6 +32,7 @@ public class Constants {
     public static final String CONNECTION_TIMEOUT_IN_SECONDS = "connectionTimeoutInSeconds";
     public static final String MAX_USER_AGENT_RETRIES = "maxRetrieveAttemptsPerUserAgent";
     public static final String UPDATE_ALL_SERIES = "updateAllSeries";
+    public static final String TASK_INTERVAL_MINUTES = "taskIntervalInMinutes";
     public static boolean INCLUDE_ALL_SERIES = false;
     public static boolean isDryRun = false;
     public static int largestSize = 0;
@@ -40,4 +43,5 @@ public class Constants {
     public static int staleCandidatedTriggerInDays = 1;
     public static int connectionTimeoutInSeconds = 1;
     public static int maxRetrieveAttemptsPerUserAgent = 0;
+    public static int taskInterval = 0;
 }

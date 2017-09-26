@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileUtil {
+
     public static String readContent(File file){
         String rawData = null;
 

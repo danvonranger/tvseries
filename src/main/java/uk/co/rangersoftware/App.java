@@ -1,5 +1,6 @@
 package uk.co.rangersoftware;
 
+import uk.co.rangersoftware.config.AppManager;
 import uk.co.rangersoftware.config.GlobalConfig;
 import uk.co.rangersoftware.config.GlobalConfiguration;
 import uk.co.rangersoftware.downloader.DownloadManager;
@@ -9,8 +10,6 @@ import uk.co.rangersoftware.log.ConsoleLogger;
 import uk.co.rangersoftware.log.Log;
 import uk.co.rangersoftware.media.SoundManager;
 import uk.co.rangersoftware.media.SoundManagerImpl;
-import uk.co.rangersoftware.media.TextToSpeech;
-import uk.co.rangersoftware.media.TextToSpeechImpl;
 import uk.co.rangersoftware.print.ColourPrint;
 import uk.co.rangersoftware.util.DurationTimer;
 
@@ -28,17 +27,22 @@ public class App {
         timer.start();
 
         try {
-            DownloadManager downloadManager = new DownloadManager(logger, globalConfig, soundManager);
-            downloadProgress = downloadManager.start();
-            logger.log("");
-            printDownloadProgress(downloadProgress, logger, soundManager);
-            logger.log("");
-            soundManager.sayIt("Update completed.");
+            if(AppManager.canRunApp(logger)) {
+                DownloadManager downloadManager = new DownloadManager(logger, globalConfig, soundManager);
+                downloadProgress = downloadManager.start();
+                logger.log("");
+                printDownloadProgress(downloadProgress, logger, soundManager);
+                logger.log("");
+                soundManager.sayIt("Update completed.");
+            }else{
+                logger.log("Can't run app just now");
+                Thread.sleep(5000);
+            }
         } catch (FileNotFoundException ex) {
             soundManager.sayIt("Aborting downlaod. " + ex.getMessage() );
             logger.logError("Aborting. " + ex.getMessage(), ColourPrint.Foreground.RED);
         } catch (SiteNotAvailableException siteEx) {
-            soundManager.sayIt("Aborting download. " + siteEx.getMessage());
+            //soundManager.sayIt("Aborting download. " + siteEx.getMessage());
             logger.logError("Aborting. " + siteEx.getMessage(), ColourPrint.Foreground.RED);
         } catch (Exception exception) {
             soundManager.sayIt("Aborting download. " + exception.getMessage());
@@ -46,8 +50,10 @@ public class App {
         } finally {
             logger.log(String.format("Search completed in %s", timer.stop()));
             logger.cleanup();
-            soundManager.play(SoundManagerImpl.SoundType.APPLICATION_END);
+            AppManager.stopRunningState();
+            //soundManager.play(SoundManagerImpl.SoundType.APPLICATION_END);
             logger.log("All done.");
+            System.exit(0);
         }
     }
 

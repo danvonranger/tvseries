@@ -89,6 +89,7 @@ public class GlobalConfiguration implements GlobalConfig {
         Constants.verboseMode = Boolean.parseBoolean(configValue(Constants.DEBUG_MODE));
 
         Constants.connectionTimeoutInSeconds = Integer.parseInt(configValue(Constants.CONNECTION_TIMEOUT_IN_SECONDS));
+        Constants.taskInterval = Integer.parseInt(configValue(Constants.TASK_INTERVAL_MINUTES));
         Constants.maxRetrieveAttemptsPerUserAgent = Integer.parseInt(configValue(Constants.MAX_USER_AGENT_RETRIES));
         Constants.staleRecycleIntervalInDays = Integer.parseInt(configValue(Constants.STALE_RECYCLE_INTERVAL_IN_DAYS));
         Constants.minimumInteralBetweenChecksInHours = Integer.parseInt(configValue(Constants.MINIMUM_INTERAL_BETWEEN_CHECKS_IN_HOURS));
