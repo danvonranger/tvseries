@@ -26,31 +26,31 @@ public class App {
         DurationTimer timer = new DurationTimer();
         timer.start();
 
+
         try {
             if(AppManager.canRunApp(logger)) {
+                AppManager.createLockFile();
                 DownloadManager downloadManager = new DownloadManager(logger, globalConfig, soundManager);
                 downloadProgress = downloadManager.start();
-                logger.log("");
                 printDownloadProgress(downloadProgress, logger, soundManager);
-                logger.log("");
-                soundManager.sayIt("Update completed.");
-            }else{
-                logger.log("Can't run app just now");
-                Thread.sleep(5000);
+                AppManager.persistCurrentTime();
+                AppManager.deleteLockFile();
             }
         } catch (FileNotFoundException ex) {
-            soundManager.sayIt("Aborting downlaod. " + ex.getMessage() );
+            AppManager.deleteLockFile();
+            //soundManager.sayIt("Aborting downlaod. " + ex.getMessage() );
             logger.logError("Aborting. " + ex.getMessage(), ColourPrint.Foreground.RED);
         } catch (SiteNotAvailableException siteEx) {
+            AppManager.deleteLockFile();
             //soundManager.sayIt("Aborting download. " + siteEx.getMessage());
             logger.logError("Aborting. " + siteEx.getMessage(), ColourPrint.Foreground.RED);
         } catch (Exception exception) {
-            soundManager.sayIt("Aborting download. " + exception.getMessage());
+            AppManager.deleteLockFile();
+            //soundManager.sayIt("Aborting download. " + exception.getMessage());
             logger.logError(exception.getMessage(), ColourPrint.Foreground.RED);
         } finally {
             logger.log(String.format("Search completed in %s", timer.stop()));
             logger.cleanup();
-            AppManager.stopRunningState();
             //soundManager.play(SoundManagerImpl.SoundType.APPLICATION_END);
             logger.log("All done.");
             System.exit(0);
