@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static uk.co.rangersoftware.util.Constants.ROOT_FOLDER;
+import static uk.co.rangersoftware.util.Constants.TV_SHOWS_FILE_NAME;
+import static uk.co.rangersoftware.util.Constants.TV_SHOW_EXT;
+
 public class FileUtil {
 
     public static String readContent(File file){

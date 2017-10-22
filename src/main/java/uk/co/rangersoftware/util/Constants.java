@@ -3,7 +3,9 @@ package uk.co.rangersoftware.util;
 public class Constants {
     public static final String ROOT_FOLDER = "F:\\github\\tvseries\\";
     public static final String DOWNLOAD_HISTORY_FILE_NAME = ROOT_FOLDER +  "history.txt";
-    public static final String TV_SHOWS_FILE_NAME = ROOT_FOLDER + "tv_shows.xml";
+    public static final String TV_SHOW_NAME = "tv_shows";
+    public static final String TV_SHOW_EXT = ".xml";
+    public static final String TV_SHOWS_FILE_NAME = ROOT_FOLDER + TV_SHOW_NAME + TV_SHOW_EXT;
     public static final String LOCK_FILE_NAME = ROOT_FOLDER + "tv.lock";
     public static final String LAST_DOWNLOAD_RUN_FILE_NAME = ROOT_FOLDER + "tv.frequency";
     public static final String DOWNLOAD_DATA_FILE_NAME = ROOT_FOLDER + "download.data";
