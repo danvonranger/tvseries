@@ -10,7 +10,6 @@ import uk.co.rangersoftware.log.Log;
 import uk.co.rangersoftware.matchers.MagnetMatch;
 import uk.co.rangersoftware.matchers.TitleMatch;
 import uk.co.rangersoftware.matchers.VersionMatch;
-import uk.co.rangersoftware.media.SoundManager;
 import uk.co.rangersoftware.model.DownloadSize;
 import uk.co.rangersoftware.model.MagnetLink;
 import uk.co.rangersoftware.model.Series;
@@ -28,16 +27,14 @@ public class ThePirateBaySiteParser implements Parser {
     private Sizing sizer;
     private Log logger;
     private DownloadProgress downloadProgress;
-    private SoundManager soundManager;
 
-    public ThePirateBaySiteParser(VersionMatch versionMatcher, TitleMatch titleMatcher, MagnetMatch magnetLinkMatcher, Sizing sizer, Log logger, DownloadProgress downloadProgress, SoundManager soundManager) {
+    public ThePirateBaySiteParser(VersionMatch versionMatcher, TitleMatch titleMatcher, MagnetMatch magnetLinkMatcher, Sizing sizer, Log logger, DownloadProgress downloadProgress) {
         this.versionMatcher = versionMatcher;
         this.titleMatcher = titleMatcher;
         this.magnetLinkMatcher = magnetLinkMatcher;
         this.sizer = sizer;
         this.logger = logger;
         this.downloadProgress = downloadProgress;
-        this.soundManager = soundManager;
     }
 
     public List<MagnetLink> candidates(String rawHtmlData, Series series, List<MagnetLink> candidates) {

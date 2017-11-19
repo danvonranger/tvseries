@@ -4,7 +4,6 @@ import org.apache.commons.lang.StringUtils;
 import uk.co.rangersoftware.config.GlobalConfig;
 import uk.co.rangersoftware.log.Log;
 import uk.co.rangersoftware.matchers.*;
-import uk.co.rangersoftware.media.SoundManager;
 import uk.co.rangersoftware.model.MagnetLink;
 import uk.co.rangersoftware.model.Series;
 import uk.co.rangersoftware.model.Show;
@@ -30,12 +29,10 @@ public class DownloadManager {
     private MagnetTrigger magnetTrigger;
     private Sizing sizer;
     private GlobalConfig globalConfig;
-    private SoundManager soundManager;
 
-    public DownloadManager(Log logger, GlobalConfig config, SoundManager soundManager) {
+    public DownloadManager(Log logger, GlobalConfig config) {
         this.logger = logger;
         globalConfig = config;
-        this.soundManager = soundManager;
     }
 
     public DownloadProgress start() throws Exception {
@@ -50,7 +47,7 @@ public class DownloadManager {
 
         int seriesCount = existingSeries.size();
         int seriesProgressCounter = 0;
-        SiteParser siteParser = new SiteParserFactory(versionMatcher, titleMatcher, magnetMatcher, logger, sizer, downloadProgress, soundManager);
+        SiteParser siteParser = new SiteParserFactory(versionMatcher, titleMatcher, magnetMatcher, logger, sizer, downloadProgress);
         List<SiteParserFactory.SiteType> siteTypes = globalConfig.siteTypes();
         Parser parser;
 
@@ -87,9 +84,6 @@ public class DownloadManager {
     private void triggerMagnetDowload(DownloadProgress downloadProgress, GlobalConfig configurationData, Series series, MagnetLink magnetLink, int count) {
         String progress = String.format("%s %s (%s MB)", series.getTitle(), magnetLink.getShow().toString(), magnetLink.getSizeInMB());
         logger.log("          Downloading: " + progress, ColourPrint.Foreground.GREEN);
-        if(count < 6) {
-            soundManager.sayIt("Downloading " + constructDownloadSpeech(magnetLink.getShow(), series));
-        }
         if(Constants.isDryRun) return;
 
         configurationData.addToDownloadHistory(magnetLink.getLink());

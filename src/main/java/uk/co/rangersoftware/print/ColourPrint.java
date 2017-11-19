@@ -9,7 +9,6 @@ import uk.co.rangersoftware.media.SoundManagerImpl;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class ColourPrint {
-    private SoundManager soundManager;
     private final static int PRINT_DELAY = 10;
 
     public enum Foreground{
@@ -23,8 +22,7 @@ public class ColourPrint {
         MAGENTA
     }
 
-    public ColourPrint(SoundManager soundManager){
-        this.soundManager = soundManager;
+    public ColourPrint(){
         AnsiConsole.systemInstall();
         System.out.println(ansi().eraseScreen(Ansi.Erase.ALL).cursor(0,0));
     }
@@ -34,7 +32,6 @@ public class ColourPrint {
     }
 
     public void printError(String message, Foreground foreground){
-        soundManager.play(SoundManagerImpl.SoundType.ERROR);
         for(char c : message.toCharArray()){
             System.out.print(ansi().fg(enumToColour(foreground)).a(c).reset());
             System.out.flush();
@@ -45,11 +42,9 @@ public class ColourPrint {
             }
         }
         System.out.println();
-        soundManager.stop();
     }
 
     public void print(String message, Foreground foreground){
-        soundManager.play(SoundManagerImpl.SoundType.TYPEWRITER);
         for(char c : message.toCharArray()){
             System.out.print(ansi().fg(enumToColour(foreground)).a(c).reset());
             System.out.flush();
@@ -60,7 +55,6 @@ public class ColourPrint {
             }
         }
         System.out.println();
-        soundManager.stop();
     }
 
     public void print(String message){

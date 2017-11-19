@@ -75,7 +75,7 @@ public class DownloaderImpl implements Downloader {
             }
             result.setRawData(out.toString());
             is.close();
-            result.setInError(result.rawData().length() > 0);
+            result.setInError(result.rawData().length() == 0);
         } catch (Exception ex) {
             result.setInError(true);
             result.setErrorMessage(ex.getMessage());

@@ -5,7 +5,6 @@ import uk.co.rangersoftware.log.Log;
 import uk.co.rangersoftware.matchers.MagnetMatch;
 import uk.co.rangersoftware.matchers.TitleMatch;
 import uk.co.rangersoftware.matchers.VersionMatch;
-import uk.co.rangersoftware.media.SoundManager;
 import uk.co.rangersoftware.util.Sizing;
 
 public class SiteParserFactory implements SiteParser {
@@ -15,16 +14,14 @@ public class SiteParserFactory implements SiteParser {
     private Log logger;
     private Sizing sizer;
     private DownloadProgress downloadProgress;
-    private SoundManager soundManager;
 
-    public SiteParserFactory(VersionMatch versionMatcher, TitleMatch titleMatcher, MagnetMatch magnetMatcher, Log logger, Sizing sizer, DownloadProgress downloadProgress, SoundManager soundManager) {
+    public SiteParserFactory(VersionMatch versionMatcher, TitleMatch titleMatcher, MagnetMatch magnetMatcher, Log logger, Sizing sizer, DownloadProgress downloadProgress) {
         this.versionMatcher = versionMatcher;
         this.titleMatcher = titleMatcher;
         this.magnetMatcher = magnetMatcher;
         this.logger = logger;
         this.sizer = sizer;
         this.downloadProgress = downloadProgress;
-        this.soundManager = soundManager;
     }
 
     public enum SiteType{
@@ -35,7 +32,7 @@ public class SiteParserFactory implements SiteParser {
         Parser parser;
         switch(type){
             case TPB:
-                parser = new ThePirateBaySiteParser(versionMatcher, titleMatcher, magnetMatcher, sizer, logger, downloadProgress, soundManager);
+                parser = new ThePirateBaySiteParser(versionMatcher, titleMatcher, magnetMatcher, sizer, logger, downloadProgress);
                 break;
             default:
                 throw new Exception("Invalid Site Parser: " + type);
