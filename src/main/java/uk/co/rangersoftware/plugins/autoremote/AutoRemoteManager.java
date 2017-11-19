@@ -18,7 +18,7 @@ public class AutoRemoteManager {
 
         String url = AutoRemote.notifcationUrl(episodes);
         try {
-            DownloadResult result = downloader.download(url);
+            DownloadResult result = downloader.download(url, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -27,7 +27,7 @@ public class AutoRemoteManager {
     public static void sendNotificationTest(List<String> downloads, Downloader downloader) {
         String url = AutoRemote.notifcationUrl(downloads);
         try {
-            DownloadResult result = downloader.download(url);
+            DownloadResult result = downloader.download(url, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

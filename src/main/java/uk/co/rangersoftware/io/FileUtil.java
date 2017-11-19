@@ -54,33 +54,13 @@ public class FileUtil {
     }
 
     public static void appendToFile(File file, String data){
-        BufferedWriter bw = null;
-        FileWriter fw = null;
-
         try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            fw = new FileWriter(file.getAbsoluteFile(), true);
-            bw = new BufferedWriter(fw);
-
-            bw.append(data + System.getProperty("line.separator"));
-
+            String fileName = file.getName();
+            FileWriter writer = new FileWriter(fileName, true);
+            writer.write(data);
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
-
-        } finally {
-            try {
-                if (bw != null)
-                    bw.close();
-
-                if (fw != null)
-                    fw.close();
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
         }
     }
 }

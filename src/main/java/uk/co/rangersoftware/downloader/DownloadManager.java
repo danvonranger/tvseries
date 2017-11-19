@@ -2,6 +2,7 @@ package uk.co.rangersoftware.downloader;
 
 import org.apache.commons.lang.StringUtils;
 import uk.co.rangersoftware.config.GlobalConfig;
+import uk.co.rangersoftware.io.FileUtil;
 import uk.co.rangersoftware.log.Log;
 import uk.co.rangersoftware.matchers.*;
 import uk.co.rangersoftware.model.MagnetLink;
@@ -16,8 +17,10 @@ import uk.co.rangersoftware.util.Constants;
 import uk.co.rangersoftware.util.DownloadSizer;
 import uk.co.rangersoftware.util.Sizing;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DownloadManager {
@@ -51,6 +54,8 @@ public class DownloadManager {
         List<SiteParserFactory.SiteType> siteTypes = globalConfig.siteTypes();
         Parser parser;
 
+        boolean useNewMethod = true;
+
         for (SiteParserFactory.SiteType siteType : siteTypes) {
             parser = siteParser.siteParser(siteType);
             for (Series series : existingSeries) {
@@ -63,7 +68,7 @@ public class DownloadManager {
                     urlCount++;
                     logger.debug("URl: "+ downloadUrl);
                     logger.debug(String.format("Attempt %s of %s for %s ", urlCount, series.getDownloadUrls().size(), series.getTitle()));
-                    DownloadResult result = downloader.download(downloadUrl);
+                    DownloadResult result = downloader.download(downloadUrl, useNewMethod);
                     parser.candidates(result.rawData(), series, magnetLinkCandidates);
                 }
                 for (MagnetLink magnetLink : magnetLinkCandidates) {

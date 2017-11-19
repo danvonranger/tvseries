@@ -8,16 +8,21 @@ public class AutoRemote {
     public static String notifcationUrl(List<String> episodes) {
         String baseUrl = "https://autoremotejoaomgcd.appspot.com/sendmessage?key=APA91bF_YHHB73bktCUBs1ASxo3h_g1Tt9lYV8NFEitj4-Pw-yYfk20HbnCeAhUouXOtCNwdWbrdOSRkuZtPlaHXyF0fZ5464jfSCfoM9fkwp2O9vDyLhbFA4dv7FqPxC8fsZIN6W8hr&message=";
         String prefix = "tvpb=:=";
-        String summary = "" + episodes.size();
-        summary += " Download";
-        if(episodes.size() > 1){
-            summary += "s";
-        }
-        summary += "\n\n";
+        String summary = "";
         String message = "";
-        for (String download : episodes) {
-            message += download;
-            message += "\n";
+        if(episodes.size() == 0){
+            message = "No new episodes.";
+        }else {
+            summary = "" + episodes.size();
+            summary += " Download";
+            if (episodes.size() > 1) {
+                summary += "s";
+            }
+            summary += "\n\n";
+            for (String download : episodes) {
+                message += download;
+                message += "\n";
+            }
         }
 
         String url = baseUrl;

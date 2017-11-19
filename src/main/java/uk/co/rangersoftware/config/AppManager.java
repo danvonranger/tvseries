@@ -18,7 +18,10 @@ import static uk.co.rangersoftware.util.Constants.LOCK_FILE_NAME;
 public class AppManager {
     private final static String DATE_FORMAT = "d-MMM-yyyy,HH:mm:ss aaa";
 
-    public static boolean canRunApp(Log logger) {
+    public static boolean canRunApp(Log logger, boolean force) {
+        if(force){
+            return true;
+        }
         if(passedCutOffTime()) {
             logger.log("It's past the cutoff time, denying execution");
             return false;

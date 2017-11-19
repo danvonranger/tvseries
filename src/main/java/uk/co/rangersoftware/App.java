@@ -13,10 +13,7 @@ import uk.co.rangersoftware.plugins.autoremote.AutoRemoteManager;
 import uk.co.rangersoftware.print.ColourPrint;
 import uk.co.rangersoftware.util.DurationTimer;
 
-import javax.mail.internet.AddressException;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class App {
     private static Log logger;
@@ -28,16 +25,15 @@ public class App {
         DurationTimer timer = new DurationTimer();
         timer.start();
         try {
-            if(AppManager.canRunApp(logger)) {
+            boolean force = true;
+            if(AppManager.canRunApp(logger, force)) {
                 AppManager.createLockFile();
                 DownloadManager downloadManager = new DownloadManager(logger, globalConfig);
                 downloadProgress = downloadManager.start();
                 printDownloadProgress(downloadProgress, logger);
                 AppManager.persistCurrentTime();
                 AppManager.deleteLockFile();
-                if(downloadProgress.getDownloadDetails().size() > 0){
-                    AutoRemoteManager.sendNotification(downloadProgress, new DownloaderImpl(logger, globalConfig));
-                }
+                AutoRemoteManager.sendNotification(downloadProgress, new DownloaderImpl(logger, globalConfig));
             }
         } catch (FileNotFoundException ex) {
             AppManager.deleteLockFile();

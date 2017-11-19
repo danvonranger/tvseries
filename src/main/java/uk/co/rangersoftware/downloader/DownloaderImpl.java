@@ -11,6 +11,7 @@ import uk.co.rangersoftware.config.GlobalConfig;
 import uk.co.rangersoftware.log.Log;
 import uk.co.rangersoftware.util.Constants;
 import uk.co.rangersoftware.util.DurationTimer;
+import uk.co.rangersoftware.util.HttpGetExample;
 
 import java.io.*;
 
@@ -24,7 +25,11 @@ public class DownloaderImpl implements Downloader {
         this.logger = logger;
     }
 
-    public DownloadResult download(String urlStr) throws FileNotFoundException {
+    public DownloadResult download(String urlStr, boolean useNewMethod) throws FileNotFoundException {
+        if(useNewMethod) {
+            return getData(urlStr);
+        }
+
         DownloadResult result = null;
         for (String userAgent : config.userAgents()) {
             int attempts = 0;
@@ -56,9 +61,22 @@ public class DownloaderImpl implements Downloader {
         }
     }
 
+    private DownloadResult getData(String url){
+        DownloadResult result = new DownloadResult();
+        try {
+            StringBuilder sb = HttpGetExample.get(url);
+            result.setRawData(sb.toString());
+            result.setInError(result.rawData().length() == 0);
+        } catch (Exception ex) {
+            result.setInError(true);
+            result.setErrorMessage(ex.getMessage());
+        }
+
+
+        return result;
+    }
+
     private DownloadResult downloadAttempt(String urlStr, String useragent) {
-        File file = new File(Constants.DOWNLOAD_DATA_FILE_NAME);
-        file.delete();
         DownloadResult result = new DownloadResult();
         try {
             InputStream is = getConnectionStream(urlStr, useragent);
