@@ -19,16 +19,18 @@ public class AppManager {
     private final static String DATE_FORMAT = "d-MMM-yyyy,HH:mm:ss aaa";
 
     public static boolean canRunApp(Log logger, boolean force) {
-        if(force){
-            return true;
-        }
-        if(passedCutOffTime()) {
-            logger.log("It's past the cutoff time, denying execution");
-            return false;
-        }
 
         if (lockFileExists()) {
             logger.log("App is running, denying execution");
+            return false;
+        }
+
+        if(force){
+            return true;
+        }
+
+        if(passedCutOffTime()) {
+            logger.log("It's past the cutoff time, denying execution");
             return false;
         }
 

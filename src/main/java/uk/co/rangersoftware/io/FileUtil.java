@@ -55,7 +55,7 @@ public class FileUtil {
 
     public static void appendToFile(File file, String data){
         try {
-            String fileName = file.getName();
+            String fileName = file.getAbsolutePath();
             FileWriter writer = new FileWriter(fileName, true);
             writer.write(data);
             writer.close();

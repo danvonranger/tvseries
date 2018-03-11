@@ -12,20 +12,25 @@ import uk.co.rangersoftware.log.Log;
 import uk.co.rangersoftware.plugins.autoremote.AutoRemoteManager;
 import uk.co.rangersoftware.print.ColourPrint;
 import uk.co.rangersoftware.util.DurationTimer;
-
 import java.io.FileNotFoundException;
 
 public class App {
     private static Log logger;
 
     public static void main(String[] args) throws FileNotFoundException {
+        boolean force = false;
+        if(args.length > 0){
+            String arg =  args[0];
+            if(arg.equalsIgnoreCase("-force")){
+                force = true;
+            }
+        }
         GlobalConfig globalConfig = new GlobalConfiguration();
         logger = new ConsoleLogger(new ColourPrint());
         DownloadProgress downloadProgress;
         DurationTimer timer = new DurationTimer();
         timer.start();
         try {
-            boolean force = true;
             if(AppManager.canRunApp(logger, force)) {
                 AppManager.createLockFile();
                 DownloadManager downloadManager = new DownloadManager(logger, globalConfig);
